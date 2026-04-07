@@ -36,15 +36,14 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Job Costing', href: '/dashboard/jobs', icon: Hammer },
-  { label: 'Cash Flow', href: '/dashboard/cashflow', icon: TrendingUp },
-  { label: 'Invoices', href: '/dashboard/invoices', icon: FileText },
-  { label: 'Reports', href: '/dashboard/reports', icon: BarChart3 },
-  { label: 'CFO Advisor', href: '/dashboard/advisor', icon: Brain },
-  { label: 'Locations', href: '/dashboard/locations', icon: MapPin },
-  { label: 'Integrations', href: '/dashboard/integrations', icon: Plug },
-  { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+  { label: "Financial Dashboard", icon: "LayoutDashboard", path: "/dashboard" },
+  { label: "Matter Analytics", icon: "Briefcase", path: "/dashboard/matters" },
+  { label: "Trust Accounting", icon: "Shield", path: "/dashboard/trust" },
+  { label: "Billing & Collections", icon: "FileText", path: "/dashboard/billing" },
+  { label: "Partner Metrics", icon: "Users", path: "/dashboard/partners" },
+  { label: "Reports", icon: "BarChart3", path: "/dashboard/reports" },
+  { label: "Integrations", icon: "Plug", path: "/dashboard/integrations" },
+  { label: "Settings", icon: "Settings", path: "/dashboard/settings" }
 ];
 
 export default function DashboardLayoutClient({
