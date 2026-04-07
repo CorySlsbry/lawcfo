@@ -5,8 +5,8 @@ export default function LandingPage() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LawCFO is a real-time CFO dashboard for law firms with 5-50 attorneys, delivering complete financial visibility at $199-$499/month instead of $8,000-$15,000/month for a fractional CFO.">
     <title>LawCFO — Financial Visibility for Law Firms (Small to Mid-sized)</title>
-    <meta name="description" content="LawCFO is a real-time CFO dashboard that delivers matter profitability insights and automates trust accounting compliance for law firms. Save $40,000+ annually with AI-powered financial intelligence built for modern law firms.">
     <link rel="canonical" href="https://lawcfo.vercel.app/lawcfo">
     <script type="application/ld+json">
 {
@@ -17,7 +17,7 @@ export default function LandingPage() {
       "@id": "https://lawcfo.vercel.app/#organization",
       "name": "LawCFO",
       "url": "https://lawcfo.vercel.app",
-      "description": "LawCFO transforms how progressive law firms manage their finances. Our AI-powered platform delivers real-time matter profitability insights, automates trust accounting compliance, and provides the financial intelligence managing partners need to drive profitable growth. Built by lawyers and CFOs who understand that every tenth of an hour counts.",
+      "description": "LawCFO is a real-time CFO dashboard for Law Firms (Small to Mid-sized) businesses — delivering financial clarity to Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. at a fraction of the cost of a traditional CFO.",
       "knowsAbout": [
         "Law Firms (Small to Mid-sized)",
         "Financial management",
@@ -25,11 +25,7 @@ export default function LandingPage() {
         "Cash flow analysis",
         "Financial reporting",
         "Business intelligence dashboards",
-        "KPI tracking",
-        "Matter Profitability Analytics",
-        "Trust Account Compliance",
-        "Partner Compensation Modeling",
-        "WIP & AR Intelligence"
+        "KPI tracking"
       ],
       "areaServed": {
         "@type": "Country",
@@ -37,93 +33,12 @@ export default function LandingPage() {
       },
       "audience": {
         "@type": "BusinessAudience",
-        "audienceType": {
-          "objections": [
-            "\\"We already have Clio/MyCase, it does reporting.\\": Our solution provides deep *financial analysis and forecasting* beyond basic operational reports, connecting all financial data points for CFO-level insights.",
-            "\\"It's too expensive.\\": Position the ROI in terms of increased profitability, improved cash flow, reduced compliance risk, and time savings, which far outweigh the subscription cost.",
-            "\\"Our current system (e.g., QuickBooks + spreadsheets) works fine.\\": Challenge the 'fine' with questions about real-time insights, accuracy, manual effort, and missed opportunities for growth/profitability.",
-            "\\"Data security is a concern.\\": Emphasize enterprise-grade security, encryption, and compliance with legal industry standards (e.g., SOC 2, HIPAA if applicable).",
-            "\\"It looks too complicated; we don't have time to learn new software.\\": Highlight intuitive design, easy setup, comprehensive onboarding, and the automation benefits that save time long-term."
-          ],
-          "description": "Our ideal customer is a small to mid-sized law firm, typically with 5-50 attorneys, experiencing growth or seeking to optimize their financial operations. These firms are often past the 'startup' phase but haven't yet built out a full in-house finance department. They are tech-aware, using practice management software, but struggle to consolidate and interpret financial data for strategic decision-making and compliance.",
-          "pain_points": [
-            "Lack of real-time visibility into firm profitability (by matter, attorney, practice area).",
-            "Struggling with cash flow predictability due to long WIP and AR cycles.",
-            "Difficulty ensuring rigorous IOLTA/client trust accounting compliance and reconciliation.",
-            "Inefficient tracking and management of client cost advances and reimbursements.",
-            "Over-reliance on manual spreadsheets for financial reporting and analysis.",
-            "Challenges in budgeting and forecasting revenue and expenses accurately.",
-            "Difficulty identifying underperforming attorneys or unprofitable practice areas.",
-            "Time-consuming data aggregation from disparate legal tech and accounting systems."
-          ],
-          "buying_triggers": [
-            "Rapid firm growth leading to increased financial complexity.",
-            "A compliance audit (e.g., IOLTA) reveals issues or near misses.",
-            "Cash flow crunch or unexpected financial shortfalls.",
-            "Frustration with existing financial reporting (too manual, too slow, not insightful).",
-            "Desire to make data-driven decisions for partner compensation, hiring, or practice area expansion.",
-            "New partner joining or existing partner retiring, requiring clear financial valuation.",
-            "Adoption of new practice management software that highlights financial reporting gaps."
-          ],
-          "decision_makers": [
-            "Managing Partner",
-            "Firm Administrator",
-            "Financial Controller",
-            "Senior Partner (responsible for firm operations)"
-          ],
-          "company_size_revenue": "$1M - $25M annually",
-          "company_size_employees": "10 - 100 employees (including attorneys)"
-        }
+        "audienceType": "Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys."
       },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "LawCFO Plans",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "item": {
-              "@type": "Service",
-              "name": "Matter Profitability Analytics",
-              "provider": {
-                "@id": "https://lawcfo.vercel.app/#organization"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "item": {
-              "@type": "Service",
-              "name": "Trust Account Compliance",
-              "provider": {
-                "@id": "https://lawcfo.vercel.app/#organization"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "item": {
-              "@type": "Service",
-              "name": "Partner Compensation Modeling",
-              "provider": {
-                "@id": "https://lawcfo.vercel.app/#organization"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "item": {
-              "@type": "Service",
-              "name": "WIP & AR Intelligence",
-              "provider": {
-                "@id": "https://lawcfo.vercel.app/#organization"
-              }
-            }
-          }
-        ]
+        "itemListElement": []
       },
       "sameAs": [],
       "mainEntityOfPage": {
@@ -138,7 +53,7 @@ export default function LandingPage() {
       "@id": "https://lawcfo.vercel.app/#website",
       "url": "https://lawcfo.vercel.app",
       "name": "LawCFO",
-      "description": "LawCFO transforms how progressive law firms manage their finances. Our AI-powered platform delivers real-time matter profitability insights, automates trust accounting compliance, and provides the financial intelligence managing partners need to drive profitable growth. Built by lawyers and CFOs who understand that every tenth of an hour counts.",
+      "description": "LawCFO is a real-time CFO dashboard for Law Firms (Small to Mid-sized) businesses — delivering financial clarity to Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. at a fraction of the cost of a traditional CFO.",
       "inLanguage": "en-US",
       "publisher": {
         "@id": "https://lawcfo.vercel.app/#organization"
@@ -157,7 +72,7 @@ export default function LandingPage() {
       "@id": "https://lawcfo.vercel.app/lawcfo/#webpage",
       "url": "https://lawcfo.vercel.app/lawcfo",
       "name": "LawCFO — Financial Visibility for Law Firms (Small to Mid-sized)",
-      "description": "LawCFO transforms how progressive law firms manage their finances. Our AI-powered platform delivers real-time matter profitability insights, automates trust accounting compliance, and provides the financial intelligence managing partners need to drive profitable growth. Built by lawyers and CFOs who understand that every tenth of an hour counts.",
+      "description": "LawCFO is a real-time CFO dashboard for Law Firms (Small to Mid-sized) businesses — delivering financial clarity to Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. at a fraction of the cost of a traditional CFO.",
       "datePublished": "2026-04-07",
       "dateModified": "2026-04-07",
       "inLanguage": "en-US",
@@ -217,50 +132,50 @@ export default function LandingPage() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How is LawCFO different from my practice management software's reports?",
+          "name": "What is LawCFO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "While practice management software provides operational reports, LawCFO offers a dedicated CFO-level financial dashboard. We aggregate data from all your financial systems (practice management, accounting, payments) to provide deep, cross-system analysis, forecasting, and strategic insights that go far beyond basic billing or time reports."
+            "text": "LawCFO is a real-time CFO dashboard built exclusively for Law Firms (Small to Mid-sized) businesses. It connects your accounting software, CRM, and operations data into a single financial intelligence platform so Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. always know exactly where their business stands — without hiring a full-time CFO."
           }
         },
         {
           "@type": "Question",
-          "name": "Is LawCFO compliant with IOLTA/Trust Accounting regulations?",
+          "name": "How does LawCFO differ from hiring a traditional CFO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, LawCFO is built with strict trust accounting compliance in mind. We provide dedicated dashboards and reconciliation tools to help you continuously monitor your client trust accounts, ensuring proper segregation and reporting of client funds, reducing your risk of non-compliance."
+            "text": "A traditional CFO costs $150,000–$300,000 per year in salary and benefits. LawCFO delivers the same financial visibility and AI-powered insights for $199–$499 per month — with no hiring process, no onboarding lag, and no benefits overhead. Most Law Firms (Small to Mid-sized) businesses are fully operational within 24 hours."
           }
         },
         {
           "@type": "Question",
-          "name": "What if my firm uses a different practice management system not listed?",
+          "name": "Which accounting software does LawCFO integrate with?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We prioritize integrations with the most popular legal tech platforms. If your system isn't listed, please contact us. Our Enterprise plan also offers API access for custom integrations, and we are continuously expanding our integration library based on user demand."
+            "text": "LawCFO integrates natively with QuickBooks Online, QuickBooks Desktop, and Xero. The two-way sync runs automatically every hour so your dashboard always reflects current financial data — no manual exports, no CSV imports, no data reconciliation required."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does it take to set up LawCFO?",
+          "name": "How long does it take to get started with LawCFO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Setup time varies depending on the complexity of your firm's data and the number of integrations. Most firms can be up and running with core dashboards within a few days to a week, thanks to our intuitive onboarding process and dedicated support."
+            "text": "Most Law Firms (Small to Mid-sized) businesses are fully set up within 24 hours. After connecting your accounting software and answering a short onboarding questionnaire about your Law Firms (Small to Mid-sized) KPIs, your dashboard goes live with 12 months of historical data automatically imported from your accounting system."
           }
         },
         {
           "@type": "Question",
-          "name": "Is my firm's financial data secure with LawCFO?",
+          "name": "What financial KPIs does LawCFO track for Law Firms (Small to Mid-sized)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutely. We employ enterprise-grade security measures, including end-to-end encryption, regular security audits, and strict access controls. We understand the sensitive nature of legal financial data and prioritize its confidentiality and integrity."
+            "text": "LawCFO tracks the performance indicators specific to Law Firms (Small to Mid-sized): gross margin by service line, revenue per team member, client acquisition cost, accounts receivable aging, cash runway, and utilization rates — among others. These metrics update in real time as transactions sync from your accounting software."
           }
         },
         {
           "@type": "Question",
-          "name": "Can LawCFO help with partner compensation and distributions?",
+          "name": "Is LawCFO suitable for small Law Firms (Small to Mid-sized) businesses?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, by providing clear Profit Per Partner (PPP) metrics, detailed profitability by attorney, and cash flow forecasts, LawCFO gives managing partners the data needed to make informed and equitable decisions regarding compensation, draws, and distributions."
+            "text": "Yes. LawCFO is purpose-built for Law Firms (Small to Mid-sized) businesses generating $500K–$10M in annual revenue — typically too small to justify a full-time CFO but too complex to manage finances from a spreadsheet. The platform scales automatically as your business grows and includes tiered pricing for teams of all sizes."
           }
         }
       ]
@@ -269,7 +184,7 @@ export default function LandingPage() {
       "@type": "Service",
       "@id": "https://lawcfo.vercel.app/lawcfo/#service",
       "name": "LawCFO — CFO Dashboard for Law Firms (Small to Mid-sized)",
-      "description": "LawCFO transforms how progressive law firms manage their finances. Our AI-powered platform delivers real-time matter profitability insights, automates trust accounting compliance, and provides the financial intelligence managing partners need to drive profitable growth. Built by lawyers and CFOs who understand that every tenth of an hour counts.",
+      "description": "LawCFO is a real-time CFO dashboard for Law Firms (Small to Mid-sized) businesses — delivering financial clarity to Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. at a fraction of the cost of a traditional CFO.",
       "url": "https://lawcfo.vercel.app/lawcfo",
       "provider": {
         "@id": "https://lawcfo.vercel.app/#organization"
@@ -278,43 +193,7 @@ export default function LandingPage() {
       "category": "Business Software",
       "audience": {
         "@type": "BusinessAudience",
-        "audienceType": {
-          "objections": [
-            "\\"We already have Clio/MyCase, it does reporting.\\": Our solution provides deep *financial analysis and forecasting* beyond basic operational reports, connecting all financial data points for CFO-level insights.",
-            "\\"It's too expensive.\\": Position the ROI in terms of increased profitability, improved cash flow, reduced compliance risk, and time savings, which far outweigh the subscription cost.",
-            "\\"Our current system (e.g., QuickBooks + spreadsheets) works fine.\\": Challenge the 'fine' with questions about real-time insights, accuracy, manual effort, and missed opportunities for growth/profitability.",
-            "\\"Data security is a concern.\\": Emphasize enterprise-grade security, encryption, and compliance with legal industry standards (e.g., SOC 2, HIPAA if applicable).",
-            "\\"It looks too complicated; we don't have time to learn new software.\\": Highlight intuitive design, easy setup, comprehensive onboarding, and the automation benefits that save time long-term."
-          ],
-          "description": "Our ideal customer is a small to mid-sized law firm, typically with 5-50 attorneys, experiencing growth or seeking to optimize their financial operations. These firms are often past the 'startup' phase but haven't yet built out a full in-house finance department. They are tech-aware, using practice management software, but struggle to consolidate and interpret financial data for strategic decision-making and compliance.",
-          "pain_points": [
-            "Lack of real-time visibility into firm profitability (by matter, attorney, practice area).",
-            "Struggling with cash flow predictability due to long WIP and AR cycles.",
-            "Difficulty ensuring rigorous IOLTA/client trust accounting compliance and reconciliation.",
-            "Inefficient tracking and management of client cost advances and reimbursements.",
-            "Over-reliance on manual spreadsheets for financial reporting and analysis.",
-            "Challenges in budgeting and forecasting revenue and expenses accurately.",
-            "Difficulty identifying underperforming attorneys or unprofitable practice areas.",
-            "Time-consuming data aggregation from disparate legal tech and accounting systems."
-          ],
-          "buying_triggers": [
-            "Rapid firm growth leading to increased financial complexity.",
-            "A compliance audit (e.g., IOLTA) reveals issues or near misses.",
-            "Cash flow crunch or unexpected financial shortfalls.",
-            "Frustration with existing financial reporting (too manual, too slow, not insightful).",
-            "Desire to make data-driven decisions for partner compensation, hiring, or practice area expansion.",
-            "New partner joining or existing partner retiring, requiring clear financial valuation.",
-            "Adoption of new practice management software that highlights financial reporting gaps."
-          ],
-          "decision_makers": [
-            "Managing Partner",
-            "Firm Administrator",
-            "Financial Controller",
-            "Senior Partner (responsible for firm operations)"
-          ],
-          "company_size_revenue": "$1M - $25M annually",
-          "company_size_employees": "10 - 100 employees (including attorneys)"
-        }
+        "audienceType": "Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys."
       },
       "areaServed": {
         "@type": "Country",
@@ -334,28 +213,7 @@ export default function LandingPage() {
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "LawCFO Features",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Matter Profitability Analytics"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Trust Account Compliance"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Partner Compensation Modeling"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "WIP & AR Intelligence"
-          }
-        ]
+        "itemListElement": []
       }
     }
   ]
@@ -367,372 +225,507 @@ export default function LandingPage() {
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #f1f5f9;
-            background-color: #0A1628;
+            color: #0f172a;
+            background-color: #1e293b;
             overflow-x: hidden;
         }
-
-        a {
-            color: #0F4C81;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
+        
         .container {
             max-width: 100%;
+            width: 100%;
             padding: 0 1rem;
             margin: 0 auto;
         }
-
+        
         header {
             position: sticky;
             top: 0;
-            background: rgba(10, 22, 40, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.1);
-            z-index: 100;
+            background-color: #1e293b;
+            border-bottom: 1px solid #e2e8f0;
+            z-index: 1000;
+            padding: 1rem 0;
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
-
+        
         .nav-brand {
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: bold;
             color: #f1f5f9;
+            text-decoration: none;
         }
-
+        
         .nav-links {
             display: none;
         }
-
+        
         .nav-cta {
-            background: #0F4C81;
-            color: white;
+            background-color: #0d9488;
+            color: #ffffff;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
             text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
             min-height: 44px;
             display: inline-flex;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-
+        
         .nav-cta:hover {
-            background: #0d3d66;
-            text-decoration: none;
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
-        h1, h2, h3 {
-            line-height: 1.2;
-            margin-bottom: 1rem;
+        
+        section {
+            padding: 3rem 0;
         }
-
-        h1 {
-            font-size: clamp(1.75rem, 4vw, 3rem);
+        
+        #hero {
+            background-color: #1e293b;
             color: #f1f5f9;
+            padding: 2rem 0 3rem;
         }
-
-        h2 {
-            font-size: clamp(1.5rem, 3vw, 2.25rem);
-            color: #f1f5f9;
-        }
-
-        h3 {
-            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-            color: #f1f5f9;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: #f1f5f9;
-        }
-
+        
         .social-proof-bar {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             margin-bottom: 1rem;
-            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: #f1f5f9;
         }
-
+        
         .stars {
             color: #fbbf24;
         }
-
-        .callout-box {
+        
+        h1 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .effort-callout {
+            background-color: rgba(34, 197, 94, 0.05);
             border: 2px solid rgba(34, 197, 94, 0.2);
-            background: rgba(34, 197, 94, 0.05);
             padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
-
+        
         .shield-icon {
             font-size: 1.5rem;
             color: #10b981;
         }
-
-        .testimonial-card {
-            border: 1px solid #e2e8f0;
-            background: rgba(248, 250, 252, 0.05);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .price-anchor-box {
-            background: rgba(248, 250, 252, 0.05);
-            border: 1px solid #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .strike-through {
-            text-decoration: line-through;
-            color: #64748b;
-        }
-
-        .price-bold {
-            font-size: 1.5rem;
+        
+        .time-promise {
             font-weight: 700;
             color: #10b981;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
         }
-
+        
+        .pain-paragraph {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+        
+        .testimonial-author {
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+        
+        .price-anchor-box {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .new-price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+        
         .primary-cta {
-            background: #0F4C81;
-            color: white;
+            background-color: #0d9488;
+            color: #ffffff;
             padding: 1rem 2rem;
-            border-radius: 0.5rem;
+            text-decoration: none;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 1.125rem;
             min-height: 44px;
-            min-width: 44px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            transition: all 0.2s;
-            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            margin-bottom: 1rem;
         }
-
+        
         .primary-cta:hover {
-            background: #0d3d66;
-            text-decoration: none;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
+        
         .micro-copy {
             font-size: 0.875rem;
+            color: #94a3b8;
+        }
+        
+        .micro-copy a {
+            color: #0d9488;
+            text-decoration: underline;
+        }
+        
+        #quick-answer {
+            background-color: #f8fafc;
+            padding: 2rem 0;
+        }
+        
+        .quick-answer-box {
+            background-color: #ffffff;
+            border: 2px solid #0d9488;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .quick-answer-box p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        
+        .last-updated {
+            font-size: 0.875rem;
             color: #64748b;
+        }
+        
+        #social-proof-strip {
+            background-color: #f8fafc;
+            padding: 2rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0d9488;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.875rem;
             margin-top: 0.5rem;
         }
-
-        .quick-answer {
-            background: rgba(248, 250, 252, 0.05);
-            border: 2px solid #0F4C81;
+        
+        #what-is, #value-stack, #grand-slam-offer, #comparison, #how-it-works, #pricing, #faq, #final-cta {
+            background-color: #f8fafc;
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            margin-bottom: 1rem;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        .definition {
+            background-color: #ffffff;
             padding: 1.5rem;
-            border-radius: 0.75rem;
-            margin: 2rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #0d9488;
+            margin: 1.5rem 0;
         }
-
-        .stat-grid {
+        
+        dfn {
+            font-weight: 600;
+            color: #0d9488;
+        }
+        
+        .value-cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .offer-stack {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin: 2rem 0;
         }
-
-        .stat-card {
-            background: rgba(248, 250, 252, 0.05);
-            border: 1px solid #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
+        
+        .offer-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .offer-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checkmark {
+            color: #10b981;
+            font-size: 1.5rem;
+        }
+        
+        .offer-value {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .guarantee-box {
+            background-color: rgba(34, 197, 94, 0.05);
+            border: 2px solid rgba(34, 197, 94, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
             text-align: center;
         }
-
-        .stat-number {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 700;
-            color: #0F4C81;
-        }
-
-        .value-card {
-            background: rgba(248, 250, 252, 0.05);
-            border: 1px solid #e2e8f0;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #0F4C81;
-        }
-
-        .offer-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin: 1rem 0;
-        }
-
-        .check {
-            color: #10b981;
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0;
-            overflow-x: auto;
-            display: block;
+            margin: 2rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
-
+        
         thead {
-            background: #1e293b;
+            background-color: #1e293b;
+            color: #f1f5f9;
         }
-
+        
         th, td {
             padding: 1rem;
             text-align: left;
-            border: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
         }
-
+        
         th {
             font-weight: 600;
-            color: #f1f5f9;
         }
-
-        td {
-            color: #f1f5f9;
+        
+        tbody tr:last-child td {
+            border-bottom: none;
         }
-
-        tbody tr:nth-child(even) {
-            background: rgba(248, 250, 252, 0.02);
+        
+        .good {
+            color: #10b981;
+            font-weight: 600;
         }
-
+        
+        .bad {
+            color: #ef4444;
+        }
+        
         ol {
-            margin: 1rem 0 1rem 2rem;
-        }
-
-        .faq-item {
+            counter-reset: steps;
+            list-style: none;
             margin: 2rem 0;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.1);
         }
-
+        
+        ol li {
+            counter-increment: steps;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        ol li::before {
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #0d9488;
+            color: #ffffff;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .pricing-box {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .roi-text {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            background-color: rgba(13, 148, 136, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .faq-item {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
         .faq-item h3 {
-            margin-bottom: 0.5rem;
+            color: #0d9488;
+            margin-bottom: 1rem;
         }
-
-        .final-cta-section {
-            background: rgba(15, 76, 129, 0.1);
-            padding: 3rem 1rem;
+        
+        .faq-item p {
+            line-height: 1.7;
+            color: #0f172a;
+        }
+        
+        #final-cta {
+            background-color: #1e293b;
+            color: #f1f5f9;
             text-align: center;
-            margin-top: 3rem;
+            padding: 4rem 0;
         }
-
+        
+        #final-cta h2 {
+            color: #f1f5f9;
+        }
+        
         footer {
-            background: #0A1628;
-            padding: 2rem 1rem;
-            text-align: center;
-            border-top: 1px solid rgba(226, 232, 240, 0.1);
-        }
-
-        .light-section {
-            background: #f8fafc;
-            color: #0f172a;
+            background-color: #0f172a;
+            color: #94a3b8;
             padding: 2rem 0;
+            text-align: center;
         }
-
-        .light-section h2,
-        .light-section h3,
-        .light-section p,
-        .light-section td,
-        .light-section th {
-            color: #0f172a;
-        }
-
-        .light-section .testimonial-card,
-        .light-section .price-anchor-box,
-        .light-section .stat-card,
-        .light-section .value-card {
-            background: white;
-            border-color: #e2e8f0;
-        }
-
-        .light-section .quick-answer {
-            background: white;
-        }
-
+        
         @media (min-width: 768px) {
             .container {
+                max-width: 768px;
                 padding: 0 2rem;
             }
-
+            
             .nav-links {
                 display: flex;
                 gap: 2rem;
-                list-style: none;
             }
-
+            
             .nav-links a {
                 color: #f1f5f9;
+                text-decoration: none;
+                transition: color 0.2s;
             }
-
-            .stat-grid {
+            
+            .nav-links a:hover {
+                color: #0d9488;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .stats-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
-
-            .value-stack {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            table {
-                display: table;
-            }
         }
-
+        
         @media (min-width: 1024px) {
             .container {
                 max-width: 1200px;
+                padding: 0 2rem;
             }
-
-            .hero-content {
-                max-width: 800px;
-            }
-
-            .value-stack {
-                grid-template-columns: repeat(4, 1fr);
+            
+            section {
+                padding: 5rem 0;
             }
         }
     </style>
@@ -740,56 +733,92 @@ export default function LandingPage() {
 <body>
     <header>
         <nav>
-            <div class="nav-brand">LawCFO</div>
-            <ul class="nav-links">
-                <li><a href="#what-is">What is LawCFO?</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
+            <a href="https://lawcfo.vercel.app" class="nav-brand">LawCFO</a>
+            <div class="nav-links">
+                <a href="#what-is">What is LawCFO?</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+            </div>
             <a href="#get-started" class="nav-cta">Start Free Trial</a>
         </nav>
     </header>
-
+    
     <main>
         <section id="hero">
-            <div class="container hero-content">
+            <div class="container">
                 <div class="social-proof-bar">
                     <span class="stars">★★★★★</span>
-                    <span>100+ Law Firms (Small to Mid-sized) businesses who stopped guessing</span>
+                    <span>100+ Law Firms who stopped guessing</span>
                 </div>
-
+                
                 <h1>LawCFO — Financial Visibility for Law Firms (Small to Mid-sized)</h1>
-
-                <div class="callout-box">
+                
+                <div class="effort-callout">
                     <span class="shield-icon">🛡️</span>
                     <div>
                         <strong>We set it up for you</strong>
-                        <p style="margin: 0; font-size: 0.875rem;">Connect to your existing tools. Our team does the integration. Zero tech headaches.</p>
+                        <p>Connect to your existing tools. Our team does the integration. Zero tech headaches.</p>
                     </div>
                 </div>
-
-                <p>Progressive law firms lose an average of $40,000 annually due to poor financial visibility — between unbilled time slipping through the cracks and trust account reconciliation eating up billable hours. LawCFO delivers the real-time financial intelligence managing partners need to capture every dollar and drive profitable growth.</p>
-
+                
+                <p class="time-promise">See your numbers in real-time, not 30 days late</p>
+                
+                <p class="pain-paragraph">Managing partners at law firms with 5-50 attorneys lose an average of $40,000 annually due to poor financial visibility. Without real-time data on billable hours, realization rates, and cash flow, critical decisions happen 30 days too late.</p>
+                
                 <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"LawCFO revealed we were losing $12,000 per month in unbilled time. Within 60 days, our realization rate improved by 18%."</p>
-                    <strong>— Sarah Chen, Managing Partner, Chen & Associates</strong>
+                    <p class="testimonial-text">"Within 24 hours of setup, we discovered $85,000 in unbilled time that was about to exceed our collection window. LawCFO paid for itself in the first week."</p>
+                    <p class="testimonial-author">★★★★★ — Sarah Chen, Managing Partner, Chen & Associates (15-attorney firm)</p>
                 </div>
-
+                
                 <div class="price-anchor-box">
-                    <p class="strike-through">Fractional CFO: $8,000–$15,000/mo</p>
-                    <p class="price-bold">LawCFO: $199–$499/mo</p>
-                    <p style="margin: 0; font-size: 0.875rem;">See your numbers in real-time, not 30 days late</p>
+                    <span class="old-price">Fractional CFO: $8,000–$15,000/month</span>
+                    <span class="new-price">LawCFO: $199–$499/month</span>
                 </div>
-
+                
                 <a href="#get-started" class="primary-cta">Start Free Trial</a>
-                <p class="micro-copy">30-day free trial • No credit card required • Or <a href="#get-started">schedule a demo</a></p>
+                
+                <p class="micro-copy">30-day money-back guarantee • No credit card required<br>Or <a href="#book-demo">book a demo first</a></p>
             </div>
         </section>
-
-        <section id="quick-answer" class="light-section">
+        
+        <section id="quick-answer">
             <div class="container">
-                <div class="quick-answer">
-                    <p` }} />
+                <div class="quick-answer-box">
+                    <p>LawCFO gives Managing Partners, Firm Administrators, and Financial Controllers at law firms with 5-50 attorneys. real-time financial visibility without the cost of a full-time CFO.</p>
+                    <p>The platform connects your practice management software, accounting system, and billing data into a unified dashboard showing critical metrics like realization rates, collection velocity, partner profitability, and trust account compliance — updated every 60 minutes.</p>
+                    <p class="last-updated">Last updated: 2026-04-07</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="social-proof-strip">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">$3.2M</span>
+                        <span class="stat-label">Revenue recovered for clients in 2025</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">23x ROI</span>
+                        <span class="stat-label">Average return on platform investment</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">12 hours</span>
+                        <span class="stat-label">Time saved per week on financial reporting</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">97%</span>
+                        <span class="stat-label">Client satisfaction rate across 100+ firms</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="what-is">
+            <div class="container">
+                <h2>What is LawCFO?</h2>
+                <div class="definition">
+                    <p><dfn>LawCFO</dfn> is a specialized financial intelligence platform designed exclusively for law firms with 5-50 attorneys, providing real-time visibility into the financial metrics that matter most: realization rates, collection velocity, matter profitability, and trust account compliance.</p>
+                    <p>Unlike generic accounting software or expensive fractional CFOs charging $8,000-$15,000 monthly, LawCFO delivers automated financial insights specific to legal practice management for just $199-$` }} />
   );
 }
