@@ -1,7 +1,7 @@
 # LawCFO
 
 > Financial dashboard platform for law firms (small to mid-sized) businesses.
-> Built for [object object].
+> Built for managing partners, firm administrators, and financial controllers at law firms with 5-50 attorneys..
 
 ## Overview
 
@@ -12,7 +12,7 @@ LawCFO is a real-time financial intelligence platform designed specifically for 
 - **Real-Time Dashboard** — Live financial KPIs specific to law firms (small to mid-sized)
 - **AI CFO Advisor** — Ask questions and get industry-specific financial guidance
 - **QuickBooks Integration** — Automatic two-way sync with your books
-- **Industry Reports** — Pre-built reports tailored for [object object]
+- **Industry Reports** — Pre-built reports tailored for managing partners, firm administrators, and financial controllers at law firms with 5-50 attorneys.
 - **Stripe Billing** — Subscription management built in
 
 ## Getting Started
