@@ -1,583 +1,608 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { CashFlowChart } from '@/components/charts/cashflow-chart';
-import { DollarSign, TrendingUp, AlertCircle, Loader2, Link as LinkIcon, RefreshCw } from 'lucide-react';
-import Link from 'next/link';
-import { formatCompactCurrency } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import {
+  AreaChart,
+  BarChart,
+  Area,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell
+} from "recharts";
+import {
+  ArrowUpIcon,
+  ArrowDownIcon,
+  RefreshCw,
+  DollarSign,
+  TrendingUp,
+  Clock,
+  Users,
+  FileText,
+  AlertCircle,
+  CheckCircle,
+  XCircle,
+  ChevronRight,
+  Calendar,
+  Briefcase,
+  Scale
+} from "lucide-react";
 
-/**
- * Matches the DashboardData type from @/types
- * This is what /api/qbo/data returns at response.data
- */
-interface DashboardData {
-  revenue: number;
-  expenses: number;
-  profit: number;
-  cash_balance: number;
-  accounts_receivable: number;
-  accounts_payable: number;
-  jobs: Array<any>;
-  invoices: Array<{
-    id: string;
-    invoice_number: string;
-    customer_name: string;
-    amount: number;
-    due_date: string;
-    status: string;
-    days_overdue: number;
-  }>;
-  cash_flow: Array<{
-    month: string;
-    inflow: number;
-    outflow: number;
-    net: number;
-  }>;
-  metrics: Array<{
-    label: string;
-    value: number;
-    change: number;
-    changeType: string;
-    format: string;
-  }>;
-  last_updated: string;
+interface DashboardProps {
+  dashboardData?: any;
+  isLoading: boolean;
+  onSync: () => void;
 }
 
-interface ApiResponse {
-  success: boolean;
-  data?: DashboardData;
-  message?: string;
-  error?: string;
-}
-
-const tabs = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'invoices', label: 'Invoices' },
-  { id: 'cashflow', label: 'Cash Flow' },
-  { id: 'wip', label: 'WIP' },
-  { id: 'retainage', label: 'Retainage' },
-  { id: 'sales', label: 'Sales' },
+const monthlyRevenue = [
+  { month: "Jan", revenue: 485000, billed: 520000, collected: 465000 },
+  { month: "Feb", revenue: 510000, billed: 540000, collected: 495000 },
+  { month: "Mar", revenue: 535000, billed: 560000, collected: 515000 },
+  { month: "Apr", revenue: 525000, billed: 550000, collected: 510000 },
+  { month: "May", revenue: 545000, billed: 575000, collected: 525000 },
+  { month: "Jun", revenue: 565000, billed: 590000, collected: 545000 }
 ];
 
-export default function DashboardContent() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [data, setData] = useState<ApiResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+const utilizationData = [
+  { name: "Senior Partners", utilization: 72, target: 75 },
+  { name: "Associates", utilization: 78, target: 80 },
+  { name: "Paralegals", utilization: 85, target: 85 },
+  { name: "Jr Associates", utilization: 68, target: 70 }
+];
+
+const practiceAreaRevenue = [
+  { area: "Corporate", revenue: 1250000, matters: 45 },
+  { area: "Litigation", revenue: 980000, matters: 62 },
+  { area: "Real Estate", revenue: 745000, matters: 38 },
+  { area: "Tax", revenue: 520000, matters: 28 },
+  { area: "Employment", revenue: 435000, matters: 51 }
+];
+
+const recentInvoices = [
+  { id: "INV-2024-0145", client: "Tech Innovations Inc.", amount: 28500, dueDate: "2024-02-15", status: "paid", daysOutstanding: 0 },
+  { id: "INV-2024-0144", client: "Global Manufacturing Co.", amount: 45200, dueDate: "2024-02-10", status: "overdue", daysOutstanding: 5 },
+  { id: "INV-2024-0143", client: "Retail Solutions LLC", amount: 18750, dueDate: "2024-02-20", status: "sent", daysOutstanding: 0 },
+  { id: "INV-2024-0142", client: "Healthcare Partners", amount: 62300, dueDate: "2024-02-08", status: "overdue", daysOutstanding: 7 },
+  { id: "INV-2024-0141", client: "Financial Services Group", amount: 35600, dueDate: "2024-02-25", status: "draft", daysOutstanding: 0 }
+];
+
+const wipByAttorney = [
+  { attorney: "Sarah Johnson", wipHours: 145, wipValue: 72500, avgAge: 28 },
+  { attorney: "Michael Chen", wipHours: 112, wipValue: 67200, avgAge: 35 },
+  { attorney: "Emily Davis", wipHours: 98, wipValue: 49000, avgAge: 22 },
+  { attorney: "Robert Martinez", wipHours: 167, wipValue: 100200, avgAge: 45 },
+  { attorney: "Jessica Brown", wipHours: 89, wipValue: 53400, avgAge: 18 }
+];
+
+const cashflowForecast = [
+  { week: "Week 1", inflow: 285000, outflow: 195000, balance: 890000 },
+  { week: "Week 2", inflow: 325000, outflow: 210000, balance: 1005000 },
+  { week: "Week 3", inflow: 295000, outflow: 225000, balance: 1075000 },
+  { week: "Week 4", inflow: 310000, outflow: 205000, balance: 1180000 }
+];
+
+const matterProfitability = [
+  { matter: "ABC Corp Acquisition", revenue: 125000, costs: 78000, profit: 47000, margin: 37.6 },
+  { matter: "XYZ Litigation Defense", revenue: 98000, costs: 72000, profit: 26000, margin: 26.5 },
+  { matter: "Estate Planning - Smith", revenue: 45000, costs: 28000, profit: 17000, margin: 37.8 },
+  { matter: "Commercial Lease Review", revenue: 32000, costs: 18000, profit: 14000, margin: 43.8 },
+  { matter: "Employment Dispute Resolution", revenue: 67000, costs: 48000, profit: 19000, margin: 28.4 }
+];
+
+const COLORS = ["#0F4C81", "#1E5A8E", "#3D6FA5", "#5C84BB", "#7B99D1"];
+
+export default function DashboardContent({ dashboardData, isLoading, onSync }: DashboardProps) {
+  const [activeTab, setActiveTab] = useState("overview");
   const [syncing, setSyncing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [clientId, setClientId] = useState<string | null>(null);
 
-  const getClientId = () =>
-    typeof window !== 'undefined' ? window.localStorage?.getItem?.('selectedClientId') || null : null;
-
-  const getLocationId = () =>
-    typeof window !== 'undefined' ? window.localStorage?.getItem?.('selectedLocationId') || null : null;
-
-  const fetchData = useCallback(async (cid?: string | null, lid?: string | null) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const id = cid !== undefined ? cid : getClientId();
-      const locationId = lid !== undefined ? lid : getLocationId();
-      const params = new URLSearchParams();
-      if (id) params.set('clientCompanyId', id);
-      if (locationId) params.set('locationId', locationId);
-      const qs = params.size > 0 ? '?' + params.toString() : '';
-      const url = `/api/qbo/data${qs}`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch dashboard data: ${response.statusText}`);
-      }
-      const json: ApiResponse = await response.json();
-      setData(json);
-
-      // If no meaningful data yet, auto-trigger a sync
-      const d = json.data;
-      const isEmpty = !d || (d.revenue === 0 && d.expenses === 0 && d.invoices?.length === 0);
-      if (json.success && isEmpty) {
-        await triggerSync(id, locationId);
-      }
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load dashboard data';
-      setError(errorMessage);
-      console.error('Dashboard data fetch error:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const triggerSync = async (cid?: string | null, lid?: string | null) => {
-    try {
-      setSyncing(true);
-      const id = cid !== undefined ? cid : getClientId();
-      const locationId = lid !== undefined ? lid : getLocationId();
-      const body = id ? JSON.stringify({ clientCompanyId: id }) : undefined;
-      const syncResponse = await fetch('/api/qbo/sync', {
-        method: 'POST',
-        headers: body ? { 'Content-Type': 'application/json' } : {},
-        body,
-      });
-      const syncJson = await syncResponse.json();
-
-      if (syncJson.success && syncJson.data) {
-        setData({ success: true, data: syncJson.data });
-      } else {
-        console.warn('Sync returned no data:', syncJson.error || syncJson.message);
-        const params = new URLSearchParams();
-        if (id) params.set('clientCompanyId', id);
-        if (locationId) params.set('locationId', locationId);
-        const qs = params.size > 0 ? '?' + params.toString() : '';
-        const refetch = await fetch(`/api/qbo/data${qs}`);
-        const refetchJson = await refetch.json();
-        if (refetchJson.success) {
-          setData(refetchJson);
-        }
-      }
-    } catch (err) {
-      console.error('Sync error:', err);
-    } finally {
-      setSyncing(false);
-    }
+  const handleSync = async () => {
+    setSyncing(true);
+    await onSync();
+    setSyncing(false);
   };
 
-  useEffect(() => {
-    const initialClient = getClientId();
-    const initialLocation = getLocationId();
-    setClientId(initialClient);
-    fetchData(initialClient, initialLocation);
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0
+    }).format(value);
+  };
 
-    // Listen for client switches from the layout
-    const handleClientChange = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      const newClientId = detail?.clientId ?? null;
-      setClientId(newClientId);
-      fetchData(newClientId, getLocationId());
+  const StatCard = ({ title, value, unit, change, icon: Icon, trend }: any) => (
+    <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-gray-400 text-sm font-medium">{title}</p>
+        <Icon className="h-5 w-5 text-gray-600" />
+      </div>
+      <div className="flex items-baseline gap-2">
+        <p className="text-2xl font-bold text-white">
+          {unit === "currency" ? formatCurrency(value) : unit === "percent" ? `${value}%` : value}
+        </p>
+        {change !== undefined && (
+          <span className={`flex items-center text-sm ${trend === "up" ? "text-green-500" : "text-red-500"}`}>
+            {trend === "up" ? <ArrowUpIcon className="h-3 w-3 mr-1" /> : <ArrowDownIcon className="h-3 w-3 mr-1" />}
+            {Math.abs(change)}%
+          </span>
+        )}
+      </div>
+    </div>
+  );
+
+  const StatusBadge = ({ status }: { status: string }) => {
+    const styles = {
+      paid: "bg-green-900 text-green-300 border-green-800",
+      sent: "bg-blue-900 text-blue-300 border-blue-800",
+      draft: "bg-gray-800 text-gray-400 border-gray-700",
+      overdue: "bg-red-900 text-red-300 border-red-800"
     };
 
-    // Listen for location switches from the sidebar
-    const handleLocationChange = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      fetchData(getClientId(), detail?.locationId ?? null);
+    const icons = {
+      paid: <CheckCircle className="h-3 w-3 mr-1" />,
+      sent: <Clock className="h-3 w-3 mr-1" />,
+      draft: <FileText className="h-3 w-3 mr-1" />,
+      overdue: <AlertCircle className="h-3 w-3 mr-1" />
     };
 
-    window.addEventListener('clientChanged', handleClientChange);
-    window.addEventListener('locationChanged', handleLocationChange);
-    return () => {
-      window.removeEventListener('clientChanged', handleClientChange);
-      window.removeEventListener('locationChanged', handleLocationChange);
-    };
-  }, [fetchData]);
-
-  if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
-          <p className="text-gray-400">Loading dashboard data...</p>
-        </div>
+      <span className={`flex items-center px-2 py-1 rounded-full text-xs font-medium border ${styles[status as keyof typeof styles]}`}>
+        {icons[status as keyof typeof icons]}
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </span>
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0F4C81]"></div>
       </div>
     );
   }
 
-  const dashData = data?.data;
-  const hasData = data?.success && dashData && (
-    dashData.revenue > 0 ||
-    dashData.expenses > 0 ||
-    (dashData.invoices && dashData.invoices.length > 0) ||
-    dashData.cash_balance > 0
-  );
-
-  const revenue = dashData?.revenue || 0;
-  const expenses = dashData?.expenses || 0;
-  const profit = dashData?.profit || 0;
-  const cashBalance = dashData?.cash_balance || 0;
-  const arTotal = dashData?.accounts_receivable || 0;
-  const apTotal = dashData?.accounts_payable || 0;
-  const invoices = dashData?.invoices || [];
-  const cashFlowData = dashData?.cash_flow || [];
-
-  // Calculate AR from invoices if the aggregate is 0
-  const computedAR = arTotal > 0 ? arTotal : invoices
-    .filter(inv => inv.status !== 'paid')
-    .reduce((sum, inv) => sum + inv.amount, 0);
-
   return (
-    <div className="space-y-6">
-      {/* Tab Navigation + Sync Button */}
-      <div className="flex items-center gap-2 sm:gap-4">
-        <div className="flex-1 overflow-x-auto -mx-1 px-1 scrollbar-none">
-          <div className="inline-flex min-w-full sm:min-w-0 bg-[#1a1a26] border border-[#2a2a3d] rounded-lg p-1 gap-0.5">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`whitespace-nowrap px-3 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors flex-shrink-0 ${
-                  activeTab === tab.id
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-[#2a2a3d]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+    <div className="min-h-screen bg-black text-white p-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold mb-1">Financial Dashboard</h1>
+            <p className="text-gray-400">Real-time insights for your law firm</p>
           </div>
+          <button
+            onClick={handleSync}
+            disabled={syncing}
+            className="flex items-center gap-2 px-4 py-2 bg-[#0F4C81] hover:bg-[#1E5A8E] rounded-lg font-medium transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
+            {syncing ? "Syncing..." : "Sync Data"}
+          </button>
         </div>
-        <button
-          onClick={triggerSync}
-          disabled={syncing}
-          className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#1a1a26] border border-[#2a2a3d] text-gray-300 hover:text-white hover:bg-[#2a2a3d] rounded-lg transition-colors disabled:opacity-50 flex-shrink-0"
-          title="Sync QuickBooks data"
-        >
-          <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-          <span className="hidden sm:inline">{syncing ? 'Syncing...' : 'Sync'}</span>
-        </button>
-      </div>
 
-      {syncing && (
-        <div className="flex items-center gap-3 p-3 bg-indigo-900/20 border border-indigo-800/30 rounded-lg">
-          <Loader2 className="w-4 h-4 animate-spin text-indigo-400" />
-          <p className="text-indigo-300 text-sm">Syncing data from QuickBooks...</p>
+        <div className="flex gap-2 mb-8 border-b border-gray-800">
+          {["overview", "invoices", "cashflow", "reports"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === tab
+                  ? "text-[#0F4C81] border-b-2 border-[#0F4C81]"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
         </div>
-      )}
 
-      {/* Overview Tab */}
-      {activeTab === 'overview' && (
-        <div className="space-y-6">
-          {!hasData ? (
-            <Card className="bg-gray-800 border-gray-700 p-8">
-              <div className="flex flex-col items-center justify-center gap-4 text-center">
-                <AlertCircle className="w-12 h-12 text-gray-500" />
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                    {data?.success ? 'No financial data yet' : 'Connect QuickBooks to see your financial overview'}
-                  </h3>
-                  <p className="text-gray-400 mb-4">
-                    {data?.success
-                      ? 'Click "Sync" above to pull your latest QuickBooks data, or add transactions in QBO first.'
-                      : 'Start tracking your revenue, expenses, and cash flow in real-time.'}
-                  </p>
-                  {!data?.success && (
-                    <Link href="/dashboard/integrations">
-                      <button className="flex items-center gap-2 mx-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
-                        <LinkIcon className="w-4 h-4" />
-                        Go to Integrations
-                      </button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </Card>
-          ) : (
-            <>
-              {/* KPI Cards */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-                <Card className="bg-gray-800 border-gray-700 p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-gray-400 text-sm font-medium">Revenue</p>
-                    <DollarSign className="w-4 h-4 text-indigo-500" />
-                  </div>
-                  <p className="text-2xl font-bold text-white">{formatCompactCurrency(revenue)}</p>
-                </Card>
+        {activeTab === "overview" && (
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard
+                title="Realization Rate"
+                value={92.5}
+                unit="percent"
+                change={2.3}
+                trend="up"
+                icon={TrendingUp}
+              />
+              <StatCard
+                title="Collection Rate"
+                value={94.8}
+                unit="percent"
+                change={-0.5}
+                trend="down"
+                icon={DollarSign}
+              />
+              <StatCard
+                title="WIP Days"
+                value={38}
+                unit="days"
+                change={5.6}
+                trend="down"
+                icon={Clock}
+              />
+              <StatCard
+                title="AR Days"
+                value={45}
+                unit="days"
+                change={3.2}
+                trend="down"
+                icon={Calendar}
+              />
+            </div>
 
-                <Card className="bg-gray-800 border-gray-700 p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-gray-400 text-sm font-medium">Expenses</p>
-                    <TrendingUp className="w-4 h-4 text-orange-500" />
-                  </div>
-                  <p className="text-2xl font-bold text-white">{formatCompactCurrency(expenses)}</p>
-                </Card>
-
-                <Card className="bg-gray-800 border-gray-700 p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-gray-400 text-sm font-medium">Accounts Receivable</p>
-                    <TrendingUp className="w-4 h-4 text-green-500" />
-                  </div>
-                  <p className="text-2xl font-bold text-white">{formatCompactCurrency(computedAR)}</p>
-                </Card>
-
-                <Card className="bg-gray-800 border-gray-700 p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-gray-400 text-sm font-medium">Cash Balance</p>
-                    <DollarSign className="w-4 h-4 text-blue-500" />
-                  </div>
-                  <p className="text-2xl font-bold text-white">{formatCompactCurrency(cashBalance)}</p>
-                </Card>
-
-                <Card className="bg-gray-800 border-gray-700 p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-gray-400 text-sm font-medium">Net Profit</p>
-                    <TrendingUp className="w-4 h-4 text-indigo-500" />
-                  </div>
-                  <p className={`text-2xl font-bold ${profit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                    {formatCompactCurrency(profit)}
-                  </p>
-                </Card>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Monthly Revenue Trend</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={monthlyRevenue}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis dataKey="month" stroke="#9CA3AF" />
+                    <YAxis stroke="#9CA3AF" tickFormatter={(value) => `$${value / 1000}k`} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#1F2937", border: "1px solid #374151" }}
+                      labelStyle={{ color: "#9CA3AF" }}
+                    />
+                    <Area type="monotone" dataKey="collected" stackId="1" stroke="#0F4C81" fill="#0F4C81" fillOpacity={0.8} />
+                    <Area type="monotone" dataKey="billed" stackId="2" stroke="#3D6FA5" fill="#3D6FA5" fillOpacity={0.6} />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
 
-              {/* Invoices Summary */}
-              {invoices.length > 0 && (
-                <Card className="bg-gray-800 border-gray-700 p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Outstanding Invoices</h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-gray-700">
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">Invoice #</th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">Customer</th>
-                          <th className="text-right py-3 px-4 text-gray-400 font-semibold">Amount</th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">Due Date</th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {invoices.slice(0, 10).map((invoice) => (
-                          <tr key={invoice.id} className="border-b border-gray-700 hover:bg-gray-700/50">
-                            <td className="py-3 px-4 text-white">{invoice.invoice_number}</td>
-                            <td className="py-3 px-4 text-gray-300">{invoice.customer_name}</td>
-                            <td className="py-3 px-4 text-right text-white font-medium">
-                              {formatCompactCurrency(invoice.amount)}
-                            </td>
-                            <td className="py-3 px-4 text-gray-300">
-                              {new Date(invoice.due_date).toLocaleDateString()}
-                            </td>
-                            <td className="py-3 px-4">
-                              <Badge
-                                variant={
-                                  invoice.status === 'overdue' ? 'danger' :
-                                  invoice.status === 'paid' ? 'success' :
-                                  'info'
-                                }
-                              >
-                                {invoice.status === 'overdue'
-                                  ? `Overdue ${invoice.days_overdue}d`
-                                  : invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)
-                                }
-                              </Badge>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </Card>
-              )}
-
-              {/* Cash Flow Chart */}
-              {cashFlowData.length > 0 && (
-                <Card className="bg-gray-800 border-gray-700 p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Cash Flow</h3>
-                  <CashFlowChart
-                    data={cashFlowData.map((cf) => ({
-                      month: cf.month,
-                      inflows: cf.inflow,
-                      outflows: cf.outflow,
-                      net: cf.net,
-                      isForecast: false,
-                    }))}
-                  />
-                </Card>
-              )}
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Invoices Tab */}
-      {activeTab === 'invoices' && (
-        <div className="space-y-6">
-          {invoices.length === 0 ? (
-            <Card className="bg-gray-800 border-gray-700 p-8">
-              <div className="flex flex-col items-center justify-center gap-4 text-center">
-                <AlertCircle className="w-12 h-12 text-gray-500" />
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                    {hasData ? 'No invoices found' : 'Connect QuickBooks to view invoices'}
-                  </h3>
-                  <p className="text-gray-400 mb-4">
-                    {hasData
-                      ? 'Create invoices in QuickBooks and click Sync to see them here.'
-                      : 'View and manage all your invoices in one place.'}
-                  </p>
-                </div>
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Utilization by Role</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={utilizationData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis dataKey="name" stroke="#9CA3AF" />
+                    <YAxis stroke="#9CA3AF" tickFormatter={(value) => `${value}%`} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#1F2937", border: "1px solid #374151" }}
+                      labelStyle={{ color: "#9CA3AF" }}
+                    />
+                    <Bar dataKey="utilization" fill="#0F4C81" />
+                    <Bar dataKey="target" fill="#374151" />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
-            </Card>
-          ) : (
-            <Card className="bg-gray-800 border-gray-700 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">All Invoices</h3>
-                <div className="flex gap-4 text-sm">
-                  <span className="text-gray-400">
-                    Total: <span className="text-white font-medium">{formatCompactCurrency(invoices.reduce((s, i) => s + i.amount, 0))}</span>
-                  </span>
-                  <span className="text-gray-400">
-                    Overdue: <span className="text-red-400 font-medium">
-                      {invoices.filter(i => i.status === 'overdue').length}
-                    </span>
-                  </span>
-                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard
+                title="Revenue Per Lawyer"
+                value={485000}
+                unit="currency"
+                change={8.5}
+                trend="up"
+                icon={Users}
+              />
+              <StatCard
+                title="Profit Per Partner"
+                value={625000}
+                unit="currency"
+                change={12.3}
+                trend="up"
+                icon={Briefcase}
+              />
+              <StatCard
+                title="Operating Expense Ratio"
+                value={38.5}
+                unit="percent"
+                change={2.1}
+                trend="down"
+                icon={TrendingUp}
+              />
+              <StatCard
+                title="Avg Billing Rate"
+                value={385}
+                unit="currency"
+                change={4.2}
+                trend="up"
+                icon={DollarSign}
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === "invoices" && (
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <StatCard
+                title="Outstanding Invoices"
+                value={287500}
+                unit="currency"
+                icon={FileText}
+              />
+              <StatCard
+                title="Overdue Amount"
+                value={107500}
+                unit="currency"
+                icon={AlertCircle}
+              />
+              <StatCard
+                title="Average Payment Time"
+                value={42}
+                unit="days"
+                icon={Clock}
+              />
+            </div>
+
+            <div className="bg-gray-900 rounded-lg border border-gray-800">
+              <div className="p-6 border-b border-gray-800">
+                <h3 className="text-lg font-semibold">Recent Invoices</h3>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-700">
-                      <th className="text-left py-3 px-4 text-gray-400 font-semibold">Invoice #</th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-semibold">Customer</th>
-                      <th className="text-right py-3 px-4 text-gray-400 font-semibold">Amount</th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-semibold">Due Date</th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-semibold">Status</th>
-                      <th className="text-right py-3 px-4 text-gray-400 font-semibold">Days Overdue</th>
+                    <tr className="border-b border-gray-800">
+                      <th className="text-left p-4 font-medium text-gray-400">Invoice ID</th>
+                      <th className="text-left p-4 font-medium text-gray-400">Client</th>
+                      <th className="text-left p-4 font-medium text-gray-400">Amount</th>
+                      <th className="text-left p-4 font-medium text-gray-400">Due Date</th>
+                      <th className="text-left p-4 font-medium text-gray-400">Days Outstanding</th>
+                      <th className="text-left p-4 font-medium text-gray-400">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {invoices.map((invoice) => (
-                      <tr key={invoice.id} className="border-b border-gray-700 hover:bg-gray-700/50">
-                        <td className="py-3 px-4 text-white">{invoice.invoice_number}</td>
-                        <td className="py-3 px-4 text-gray-300">{invoice.customer_name}</td>
-                        <td className="py-3 px-4 text-right text-white font-medium">
-                          {formatCompactCurrency(invoice.amount)}
-                        </td>
-                        <td className="py-3 px-4 text-gray-300">
-                          {new Date(invoice.due_date).toLocaleDateString()}
-                        </td>
-                        <td className="py-3 px-4">
-                          <Badge
-                            variant={
-                              invoice.status === 'overdue' ? 'danger' :
-                              invoice.status === 'paid' ? 'success' :
-                              invoice.status === 'sent' ? 'info' :
-                              'default'
-                            }
-                          >
-                            {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-                          </Badge>
-                        </td>
-                        <td className="py-3 px-4 text-right">
-                          {invoice.days_overdue > 0 ? (
-                            <span className="text-red-400">{invoice.days_overdue} days</span>
-                          ) : (
-                            <span className="text-gray-500">—</span>
+                    {recentInvoices.map((invoice) => (
+                      <tr key={invoice.id} className="border-b border-gray-800 hover:bg-gray-900/50">
+                        <td className="p-4 font-mono text-sm">{invoice.id}</td>
+                        <td className="p-4">{invoice.client}</td>
+                        <td className="p-4 font-semibold">{formatCurrency(invoice.amount)}</td>
+                        <td className="p-4 text-gray-400">{invoice.dueDate}</td>
+                        <td className="p-4">
+                          {invoice.daysOutstanding > 0 && (
+                            <span className="text-red-400">{invoice.daysOutstanding} days</span>
                           )}
+                        </td>
+                        <td className="p-4">
+                          <StatusBadge status={invoice.status} />
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </Card>
-          )}
-        </div>
-      )}
+            </div>
 
-      {/* Cash Flow Tab */}
-      {activeTab === 'cashflow' && (
-        <div className="space-y-6">
-          {cashFlowData.length === 0 ? (
-            <Card className="bg-gray-800 border-gray-700 p-8">
-              <div className="flex flex-col items-center justify-center gap-4 text-center">
-                <AlertCircle className="w-12 h-12 text-gray-500" />
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                    No cash flow data available
-                  </h3>
-                  <p className="text-gray-400 mb-4">
-                    Cash flow data will populate as transactions are recorded in QuickBooks.
-                  </p>
+            <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 className="text-lg font-semibold mb-4">Work in Progress by Attorney</h3>
+              <div className="space-y-4">
+                {wipByAttorney.map((attorney) => (
+                  <div key={attorney.attorney} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                    <div>
+                      <p className="font-medium">{attorney.attorney}</p>
+                      <p className="text-sm text-gray-400">{attorney.wipHours} unbilled hours • Avg age: {attorney.avgAge} days</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-lg">{formatCurrency(attorney.wipValue)}</p>
+                      <p className="text-sm text-gray-400">WIP Value</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "cashflow" && (
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <StatCard
+                title="Current Cash Balance"
+                value={1180000}
+                unit="currency"
+                icon={DollarSign}
+              />
+              <StatCard
+                title="Trust Account Balance"
+                value={845000}
+                unit="currency"
+                icon={Scale}
+              />
+              <StatCard
+                title="30-Day Projected Cash"
+                value={1425000}
+                unit="currency"
+                icon={TrendingUp}
+              />
+            </div>
+
+            <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 className="text-lg font-semibold mb-4">4-Week Cash Flow Forecast</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={cashflowForecast}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis dataKey="week" stroke="#9CA3AF" />
+                  <YAxis stroke="#9CA3AF" tickFormatter={(value) => `$${value / 1000}k`} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#1F2937", border: "1px solid #374151" }}
+                    labelStyle={{ color: "#9CA3AF" }}
+                  />
+                  <Area type="monotone" dataKey="balance" stroke="#0F4C81" fill="#0F4C81" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="inflow" stroke="#10B981" fill="#10B981" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="outflow" stroke="#EF4444" fill="#EF4444" fillOpacity={0.3} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Receivables Aging</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Current (0-30 days)</span>
+                    <span className="font-semibold">{formatCurrency(125000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">31-60 days</span>
+                    <span className="font-semibold text-yellow-500">{formatCurrency(55000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">61-90 days</span>
+                    <span className="font-semibold text-orange-500">{formatCurrency(35000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Over 90 days</span>
+                    <span className="font-semibold text-red-500">{formatCurrency(72500)}</span>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-gray-800 flex justify-between items-center">
+                    <span className="font-medium">Total Outstanding</span>
+                    <span className="font-bold text-lg">{formatCurrency(287500)}</span>
+                  </div>
                 </div>
               </div>
-            </Card>
-          ) : (
-            <Card className="bg-gray-800 border-gray-700 p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Monthly Cash Flow</h3>
-              <CashFlowChart
-                data={cashFlowData.map((cf) => ({
-                  month: cf.month,
-                  inflows: cf.inflow,
-                  outflows: cf.outflow,
-                  net: cf.net,
-                  isForecast: false,
-                }))}
-              />
-            </Card>
-          )}
-        </div>
-      )}
 
-      {/* WIP Tracking Tab */}
-      {activeTab === 'wip' && (
-        <div className="space-y-6">
-          <Card className="bg-gray-800 border-gray-700 p-8">
-            <div className="flex flex-col items-center justify-center gap-4 text-center">
-              <AlertCircle className="w-12 h-12 text-gray-500" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                  Connect Procore or Buildertrend to track Work in Progress
-                </h3>
-                <p className="text-gray-400 mb-4">
-                  Monitor job progress, costs, and schedules in real-time.
-                </p>
-                <Link href="/dashboard/integrations">
-                  <button className="flex items-center gap-2 mx-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
-                    <LinkIcon className="w-4 h-4" />
-                    Go to Integrations
-                  </button>
-                </Link>
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Payables Summary</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Vendor Payables</span>
+                    <span className="font-semibold">{formatCurrency(85000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Salary & Benefits</span>
+                    <span className="font-semibold">{formatCurrency(145000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Rent & Utilities</span>
+                    <span className="font-semibold">{formatCurrency(32000)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Other Operating</span>
+                    <span className="font-semibold">{formatCurrency(28000)}</span>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-gray-800 flex justify-between items-center">
+                    <span className="font-medium">Total Payables</span>
+                    <span className="font-bold text-lg">{formatCurrency(290000)}</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </Card>
-        </div>
-      )}
+          </div>
+        )}
 
-      {/* Retainage Tab */}
-      {activeTab === 'retainage' && (
-        <div className="space-y-6">
-          <Card className="bg-gray-800 border-gray-700 p-8">
-            <div className="flex flex-col items-center justify-center gap-4 text-center">
-              <AlertCircle className="w-12 h-12 text-gray-500" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                  Connect Procore or Buildertrend to track retainage
-                </h3>
-                <p className="text-gray-400 mb-4">
-                  Monitor retainage amounts and release schedules.
-                </p>
-                <Link href="/dashboard/integrations">
-                  <button className="flex items-center gap-2 mx-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
-                    <LinkIcon className="w-4 h-4" />
-                    Go to Integrations
-                  </button>
-                </Link>
+        {activeTab === "reports" && (
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Revenue by Practice Area</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={practiceAreaRevenue}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="revenue"
+                      label={({ area, percent }) => `${area} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {practiceAreaRevenue.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#1F2937", border: "1px solid #374151" }}
+                      labelStyle={{ color: "#9CA3AF" }}
+                      formatter={(value: any) => formatCurrency(value)}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+                <h3 className="text-lg font-semibold mb-4">Matter Profitability Analysis</h3>
+                <div className="space-y-3">
+                  {matterProfitability.map((matter) => (
+                    <div key={matter.matter} className="p-3 bg-gray-800 rounded">
+                      <div className="flex justify-between items-start mb-2">
+                        <p className="font-medium text-sm">{matter.matter}</p>
+                        <span className={`text-xs px-2 py-1 rounded ${
+                          matter.margin >= 35 ? "bg-green-900 text-green-300" : "bg-yellow-900 text-yellow-300"
+                        }`}>
+                          {matter.margin.toFixed(1)}% margin
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 text-xs">
+                        <div>
+                          <p className="text-gray-400">Revenue</p>
+                          <p className="font-semibold">{formatCurrency(matter.revenue)}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400">Costs</p>
+                          <p className="font-semibold">{formatCurrency(matter.costs)}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400">Profit</p>
+                          <p className="font-semibold text-green-400">{formatCurrency(matter.profit)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </Card>
-        </div>
-      )}
 
-      {/* Sales Tab */}
-      {activeTab === 'sales' && (
-        <div className="space-y-6">
-          <Card className="bg-gray-800 border-gray-700 p-8">
-            <div className="flex flex-col items-center justify-center gap-4 text-center">
-              <AlertCircle className="w-12 h-12 text-gray-500" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-200 mb-2">
-                  Connect Salesforce, HubSpot, or JobNimbus to track your sales pipeline
-                </h3>
-                <p className="text-gray-400 mb-4">
-                  Sync your sales opportunities and team performance.
-                </p>
-                <Link href="/dashboard/integrations">
-                  <button className="flex items-center gap-2 mx-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
-                    <LinkIcon className="w-4 h-4" />
-                    Go to Integrations
-                  </button>
-                </Link>
+            <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 className="text-lg font-semibold mb-4">Key Performance Indicators</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="p-4 bg-gray-800 rounded">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-400">Leverage Ratio</span>
+                    <span className="text-xs text-gray-500">Target: 3:1</span>
+                  </div>
+                  <p className="text-2xl font-bold">2.8:1</p>
+                  <div className="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#0F4C81] rounded-full" style={{ width: "93%" }}></div>
+                  </div>
+                </div>
+                <div className="p-4 bg-gray-800 rounded">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-400">Trust Reconciliation</span>
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  </div>
+                  <p className="text-2xl font-bold">$0</p>
+                  <p className="text-xs text-green-400 mt-1">Fully reconciled</p>
+                </div>
+                <div className="p-4 bg-gray-800 rounded">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-400">YTD Growth</span>
+                    <TrendingUp className="h-4 w-4 text-green-500" />
+                  </div>
+                  <p className="text-2xl font-bold">18.5%</p>
+                  <p className="text-xs text-gray-500 mt-1">vs. prior year</p>
+                </div>
               </div>
             </div>
-          </Card>
-        </div>
-      )}
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <button className="p-4 bg-gray-900 border border-gray-800 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between">
+                <span>P&L Statement</span>
+                <ChevronRight className="h-4 w-4 text-gray-400" />
+              </button>
+              <button className="p-4 bg-gray-900 border border-gray-800 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between">
+                <span>Balance Sheet</span>
+                <ChevronRight className="h-4 w-4 text-gray-400" />
+              </button>
+              <button className="p-4 bg-gray-900 border border-gray-800 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between">
+                <span>Cash Flow</span>
+                <ChevronRight className="h-4 w-4 text-gray-400" />
+              </button>
+              <button className="p-4 bg-gray-900 border border-gray-800 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between">
+                <span>Partner Report</span>
+                <ChevronRight className="h-4 w-4 text-gray-400" />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
