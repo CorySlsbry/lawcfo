@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'LawCFO | Financial Dashboard for Law Firms (Small to Mid-sized)',
   description:
-    'Real-time financial dashboard for law firms (small to mid-sized) businesses. Built for [object object]. Industry-specific KPIs, automated reporting, and integrations with QuickBooks, Stripe, and more.',
+    'Real-time financial dashboard for law firms (small to mid-sized) businesses. Built for managing partners, firm administrators, and financial controllers at law firms with 5-50 attorneys.. Industry-specific KPIs, automated reporting, and integrations with QuickBooks, Stripe, and more.',
   keywords: 'law firms (small to mid-sized) financial dashboard, LawCFO, lawcfo, CFO dashboard, law firms (small to mid-sized) accounting, financial reporting, KPI tracking',
   openGraph: {
     title: 'LawCFO | Financial Dashboard for Law Firms (Small to Mid-sized)',
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style>{`:root { --accent-color: #0F4C81; }`}</style>
+        <style>{`:root { --accent-color: #3b82f6; }`}</style>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
